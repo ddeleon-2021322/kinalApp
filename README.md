@@ -30,6 +30,7 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha creado la capa de servicio de Usuario
 * Se ha creado la entidad de Venta
 * Se ha creado el repositorio de venta
+* Se ha implementeado la capa de servicio de venta
 
 ## Solución de Errores
  Se ha actualizado un error de sintaxis en la entidad producto
