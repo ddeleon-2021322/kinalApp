@@ -33,5 +33,9 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha implementeado la capa de servicio de venta
 
 ## Solución de Errores
- Se ha actualizado un error de sintaxis en la entidad producto
+* Se ha actualizado un error de sintaxis en la entidad producto
+* Error de UsuarioRepository: El error del repositorio 
+  consistia en un error de sintaxis donde se coloco 
+  String en lugar de long lo que causaba problemas en 
+  UsuarioService
  
