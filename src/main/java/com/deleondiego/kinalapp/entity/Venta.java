@@ -17,11 +17,11 @@ public class Venta {
     private Date fechaVenta;
     @Column
     private BigDecimal total = new BigDecimal (10.2);
-    @Column int estado;
+    @Column Long estado;
 
     /*JoinColumn: Su funcion es crear un puente entre el codigo java y la columna fisaca de la base de datos
       que guarda la relacion (Foreing Key)
-    */
+    */  
 
     @ManyToOne
     @JoinColumn(name = "Clientes_dpi_cliente")
@@ -34,7 +34,7 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(Long codigoVenta, Date fechaVenta, BigDecimal total, int estado, Cliente cliente, Usuario usuario) {
+    public Venta(Long codigoVenta, Date fechaVenta, BigDecimal total, Long estado, Cliente cliente, Usuario usuario) {
         this.codigoVenta = codigoVenta;
         this.fechaVenta = fechaVenta;
         this.total = total;
@@ -66,11 +66,11 @@ public class Venta {
         this.total = total;
     }
 
-    public int getEstado() {
+    public Long getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(Long estado) {
         this.estado = estado;
     }
 
