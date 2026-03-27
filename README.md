@@ -28,6 +28,7 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha creado la capa de entidad de Usuarios 
 * Se ha creado el repositorio de usuarios
 * Se ha creado la capa de servicio de Usuario
+* Se ha creado la entidad de Venta
 
 ## Solución de Errores
  Se ha actualizado un error de sintaxis en la entidad producto
