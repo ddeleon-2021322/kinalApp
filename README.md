@@ -43,4 +43,6 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
   consistia en un error de sintaxis donde se coloco 
   String en lugar de long lo que causaba problemas en 
   UsuarioService
- 
+* Error de sintaxis Usuario entity: El error consistia 
+  en un error sintactico en una declaracion de una variable
+  de long a Long
