@@ -32,7 +32,7 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha creado el repositorio de venta
 * Se ha implementeado la capa de servicio de venta
 * Se ha creado la entidad de detalleVenta
-* Se ha creado el repositorio detalleVenta
+  * Se ha creado el repositorio detalleVenta
 
 ## Solución de Errores
 * Se ha actualizado un error de sintaxis en la entidad producto
