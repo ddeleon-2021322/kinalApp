@@ -34,6 +34,8 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha creado la entidad de detalleVenta
 * Se ha creado el repositorio detalleVenta
 * Se ha creado la capa de servicio de detalleVenta
+* se ha creado el controlador de usuarios
+* Se ha creado el controlador de productos
 
 ## Solución de Errores
 * Se ha actualizado un error de sintaxis en la entidad producto
