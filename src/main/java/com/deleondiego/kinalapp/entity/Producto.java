@@ -16,7 +16,7 @@ public class Producto {
     @Column
     private String nombreProducto;
     @Column
-    private BigDecimal precio = new BigDecimal("10,2");
+    private BigDecimal precio = new BigDecimal("10.2");
     @Column
     private int stock;
     @Column
