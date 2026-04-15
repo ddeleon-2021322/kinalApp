@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Editar Perfil de Usuario</h1>
+        <a th:href="@{/usuarios/gestion}" class="btn-back">Cancelar</a>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/usuarios/guardar}" method="post" class="glass-form" style="display: flex; flex-direction: column; gap: 20px;">
+
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label>Código Usuario (Fijo)</label>
+                    <input type="number" name="codigoUsuario" th:value="${usuario.codigoUsuario}" readonly style="background-color: #e9ecef;">
+                </div>
+                <div style="flex: 2;">
+                    <label>Nombre de Usuario</label>
+                    <input type="text" name="userName" th:value="${usuario.userName}" required>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 2;">
+                    <label>Correo Electrónico</label>
+                    <input type="email" name="email" th:value="${usuario.email}" required>
+                </div>
+                <div style="flex: 1;">
+                    <label>Rol del Sistema</label>
+                    <select name="rol" style="width: 100%;">
+                        <option value="ADMIN" th:selected="${usuario.rol == 'ADMIN'}">ADMIN</option>
+                        <option value="USER" th:selected="${usuario.rol == 'USER'}">USER</option>
+                    </select>
+                </div>
+            </div>
+
+            <input type="hidden" name="password" th:value="${usuario.password}">
+            <input type="hidden" name="estado" th:value="${usuario.estado}">
+
+            <button type="submit" class="btn-save" style="width: 220px; align-self: flex-end;">Actualizar Usuario</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>
