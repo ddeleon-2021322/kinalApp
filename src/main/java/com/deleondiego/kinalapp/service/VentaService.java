@@ -26,6 +26,9 @@ public class VentaService implements IVentaService {
 
     @Override
     public Venta guardar(Venta venta) {
+        if (venta.getFechaVenta() == null) {
+            venta.setFechaVenta(new java.util.Date());
+        }
         validarVenta(venta);
         return ventaRepository.save(venta);
     }
