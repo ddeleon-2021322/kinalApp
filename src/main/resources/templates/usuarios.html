@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-content">
+            <h1>Gestión de Usuarios</h1>
+            <a th:href="@{/menu}" class="btn-back">Volver al Menú</a>
+        </div>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/usuarios/guardar}" method="post" class="glass-form">
+            <input type="number" name="codigoUsuario" placeholder="ID" required>
+            <input type="text" name="userName" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Pass" required>
+            <input type="email" name="email" placeholder="Email" required>
+
+            <select name="rol" class="custom-select">
+                <option value="ADMIN">ADMIN</option>
+                <option value="USER">USER</option>
+            </select>
+
+            <input type="hidden" name="estado" value="1">
+
+            <button type="submit" class="btn-save">Guardar</button>
+        </form>
+    </section>
+
+    <section class="table-container">
+        <table class="glass-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>USER</th>
+                <th>EMAIL</th>
+                <th>ROL</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${usuarios}">
+                <td th:text="${u.codigoUsuario}"></td>
+                <td th:text="${u.userName}"></td>
+                <td th:text="${u.email}"></td>
+                <td th:text="${u.rol}"></td>
+                <td class="actions-cell">
+                    <a th:href="@{/usuarios/editar/{id}(id=${u.codigoUsuario})}" class="btn-edit">
+                        Editar
+                    </a>
+
+                    <a href="#" class="btn-delete"
+                       onclick="alert('Función no disponible: La eliminación está restringida.'); return false;"
+                       style="background-color: #d1d5db; color: #6b7280; cursor: not-allowed; opacity: 0.7;">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+
+</body>
+</html>
