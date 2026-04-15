@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Ventas - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-content">
+            <h1>Gestión de Ventas</h1>
+            <a th:href="@{/menu}" class="btn-back">Volver al Menú</a>
+        </div>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/ventas/guardar}" method="post" class="glass-form">
+            <select name="cliente" class="custom-select" required>
+                <option value="" disabled selected>Cliente (DPI)</option>
+                <option th:each="c : ${clientes}" th:value="${c.DPICliente}"
+                        th:text="${c.DPICliente + ' - ' + c.nombreCliente}"></option>
+            </select>
+
+            <select name="usuario" class="custom-select" required>
+                <option value="" disabled selected>Vendedor (ID)</option>
+                <option th:each="u : ${usuarios}" th:value="${u.codigoUsuario}"
+                        th:text="${u.codigoUsuario + ' - ' + u.userName}"></option>
+            </select>
+
+            <input type="number" step="0.01" name="total" placeholder="Total Q" required>
+            <input type="hidden" name="estado" value="1">
+            <button type="submit" class="btn-save">Registrar</button>
+        </form>
+    </section>
+
+    <section class="table-container">
+        <table class="glass-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>FECHA</th>
+                <th>DPI CLIENTE</th>
+                <th>CLIENTE</th>
+                <th>ID VEND.</th>
+                <th>VENDEDOR</th>
+                <th>TOTAL</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="v : ${ventas}">
+                <td th:text="${v.codigoVenta}"></td>
+                <td th:text="${v.fechaVenta != null ? #dates.format(v.fechaVenta, 'dd/MM/yyyy') : '---'}"></td>
+                <td th:text="${v.cliente?.DPICliente}"></td>
+                <td th:text="${v.cliente?.nombreCliente + ' ' + v.cliente?.apellidoCliente}"></td>
+                <td th:text="${v.usuario?.codigoUsuario}"></td>
+                <td th:text="${v.usuario?.userName}"></td>
+                <td th:text="'Q' + ${v.total}"></td>
+                <td class="actions-cell">
+                    <a th:href="@{/ventas/editar/{id}(id=${v.codigoVenta})}" class="btn-edit">Editar</a>
+
+                    <a href="#" class="btn-delete-blocked" onclick="alert('No disponible'); return false;">Eliminar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>
