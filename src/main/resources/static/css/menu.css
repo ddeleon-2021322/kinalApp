@@ -1,0 +1,80 @@
+body {
+    /* Crea el degradado circular: azul claro en el centro a azul grisáceo afuera */
+    background: radial-gradient(circle, #b5cadd 0%, #8ca6be 100%);
+    /* Hace que el fondo ocupe TODA la altura de la pantalla */
+    min-height: 100vh;
+    /* Quita los espacios blancos que el navegador pone por defecto a las orillas */
+    margin: 0;
+    /* Define la letra para que se vea moderna y limpia */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+.Menu {
+    display: flex;
+    flex-wrap: wrap; /* Esto hace que si no caben las 4, la última baje */
+    justify-content: center;
+    gap: 20px;
+    padding: 40px;
+}
+
+.MenuSeleccion {
+    /* Define el color de fondo con transparencia (efecto cristal) */
+    background: rgba(255, 255, 255, 0.1);
+    /* Dibuja un borde delgadito casi invisible */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Redondea las esquinas de la tarjeta */
+    border-radius: 20px;
+    /* Espacio interno para que el texto no pegue a los bordes de la tarjeta */
+    padding: 30px;
+    /* Hace que todo el texto e iconos dentro se centren */
+    text-align: center;
+    /* Color de letra blanco */
+    color: white;
+    /* Controla la velocidad de la animación cuando pasas el mouse (0.3 segundos) */
+    transition: 0.3s;
+}
+
+.icon-circle {
+    /* Define el tamaño exacto del círculo */
+    width: 80px;
+    height: 80px;
+    /* Color blanco sólido de fondo */
+    background: white;
+    /* Color del icono (el azul grisáceo del tema) */
+    color: #4a6177;
+    /* Lo hace un círculo perfecto al 50% */
+    border-radius: 50%;
+    /* Centra el icono justo en medio del círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Lo centra respecto a la tarjeta y le da espacio abajo */
+    margin: 0 auto 20px;
+    /* Tamaño del icono adentro */
+    font-size: 30px;
+}
+
+.btn-action {
+    /* Hace que el enlace se comporte como un bloque/botón */
+    display: inline-block;
+    background: white;
+    color: #4a6177;
+    /* Quita la raya de subrayado que traen los links por defecto */
+    text-decoration: none;
+    /* Espacio interno: 8px arriba/abajo y 25px a los lados */
+    padding: 8px 25px;
+    /* Redondea las esquinas del botón */
+    border-radius: 8px;
+    font-weight: bold;
+    /* Hace que el botón ocupe todo el ancho de la tarjeta */
+    width: 100%;
+}
+
+.MenuSeleccion:hover {
+    /* Eleva la tarjeta 8 píxeles hacia arriba */
+    transform: translateY(-8px);
+    /* Aumenta un poquito la opacidad del fondo blanco */
+    background: rgba(255, 255, 255, 0.15);
+    /* Pone una sombra negra suave abajo para dar efecto de profundidad */
+    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
