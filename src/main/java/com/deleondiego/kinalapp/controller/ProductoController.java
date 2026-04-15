@@ -4,11 +4,13 @@ import com.deleondiego.kinalapp.entity.Producto;
 import com.deleondiego.kinalapp.service.IProductoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/productos")
 public class ProductoController {
 
@@ -31,41 +33,44 @@ public class ProductoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Producto producto) {
+    @PostMapping("/guardar")
+    public String guardarDesdeForm(@ModelAttribute Producto producto) {
         try {
-            Producto nuevoProducto = productoService.guardar(producto);
-            return new ResponseEntity<>(nuevoProducto, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            productoService.guardar(producto);
+
+            return "redirect:/productos/gestion";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "redirect:/productos/gestion?error";
         }
     }
 
-    @DeleteMapping("/{codigoProducto}")
-    public ResponseEntity<Void> eliminar(@PathVariable int codigoProducto) {
-        try {
-            if (!productoService.existePorCodigo(codigoProducto)) {
-                return ResponseEntity.notFound().build();
-            }
-            productoService.eliminar(codigoProducto);
-            return ResponseEntity.ok().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+    @GetMapping("/editar/{id}")
+    public String mostrarEditar(@PathVariable Long id, Model model) {
+        Producto producto = productoService.buscarPorCodigo(id.intValue()).orElse(null);
+
+        if (producto == null) {
+            return "redirect:/productos/gestion?error=no_encontrado";
         }
+
+        model.addAttribute("producto", producto);
+
+        return "editarproducto";
     }
 
-    @PutMapping("/{codigoViejo}")
-    public ResponseEntity<?> actualizar(@PathVariable int codigoViejo, @RequestBody Producto producto) {
+    @GetMapping("/eliminar/{id}")
+    public String eliminarDesdeWeb(@PathVariable Long id) {
         try {
-            if (!productoService.existePorCodigo(codigoViejo)) {
-                return ResponseEntity.notFound().build();
-            }
-            Producto productoActualizado = productoService.actualizar(codigoViejo, producto);
-            return ResponseEntity.ok(productoActualizado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+            productoService.eliminar(id.intValue());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return "redirect:/productos/gestion";
+    }
+    @GetMapping("/gestion")
+    public String mostrarGestion(Model model) {
+        List<Producto> productos = productoService.listarProductos();
+        model.addAttribute("productos", productos);
+        return "productos"; // Nombre de tu archivo .html
     }
 }
