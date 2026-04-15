@@ -1,0 +1,60 @@
+/* --- Ajustes para el Formulario de Clientes --- */
+
+/* El formulario de clientes tiene 4 campos, así que necesita una estructura flexible */
+.glass-form {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap; /* Mantiene el DPI, Nombre, Apellido y Dirección en una línea */
+    width: 100%;
+    padding: 10px 0;
+}
+
+/* Configuramos los inputs para que se adapten al texto de 'Nombres' y 'Apellidos' */
+.glass-form input {
+    background: #f4f6f8;
+    border: 1px solid #d1d9e0;
+    padding: 12px 14px;
+    border-radius: 8px;
+    height: 46px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    flex: 1 1 auto; /* Permite que los campos de texto se estiren equitativamente */
+    min-width: 0;   /* Evita que los inputs se salgan del contenedor en pantallas pequeñas */
+}
+
+/* Estilo para el botón 'Guardar Cliente' */
+.btn-save {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    border: none;
+    padding: 0 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    height: 46px;
+    cursor: pointer;
+
+    /* PROPIEDADES DE ALINEACIÓN */
+    flex-shrink: 0;       /* Evita que los 4 inputs 'aplasten' el botón */
+    white-space: nowrap;  /* El texto 'Guardar Cliente' no se divide en dos líneas */
+    width: max-content;   /* El botón mide exactamente lo que su texto requiere */
+}
+
+/* Alineación de iconos o botones de acción en la tabla de clientes */
+.actions-cell {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-edit, .btn-delete {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
