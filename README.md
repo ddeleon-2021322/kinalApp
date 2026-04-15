@@ -36,6 +36,12 @@ Es importante saber que debes hacer para instalar y ejecutar el programa:
 * Se ha creado la capa de servicio de detalleVenta
 * se ha creado el controlador de usuarios
 * Se ha creado el controlador de productos
+* Se ha creado el controlador del login 
+* se ha creado el html del login 
+* se ha creado el css del login 
+* se ha creado el controlador del menu principal
+* se ha creado el html del menu principal 
+* se ha creado el css del menu principal
 
 ## Solución de Errores
 * Se ha actualizado un error de sintaxis en la entidad producto
