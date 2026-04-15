@@ -2,70 +2,45 @@ package com.deleondiego.kinalapp.controller;
 
 import com.deleondiego.kinalapp.entity.Venta;
 import com.deleondiego.kinalapp.service.IVentaService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.deleondiego.kinalapp.service.IClienteService; // Necesario
+import com.deleondiego.kinalapp.service.IUsuarioService; // Necesario
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@RestController
+@Controller // Asegúrate de que NO diga @RestController
 @RequestMapping("/ventas")
 public class VentaController {
 
     private final IVentaService ventaService;
+    private final IClienteService clienteService;
+    private final IUsuarioService usuarioService;
 
-    public VentaController(IVentaService ventaService) {
+    public VentaController(IVentaService ventaService, IClienteService clienteService, IUsuarioService usuarioService) {
         this.ventaService = ventaService;
+        this.clienteService = clienteService;
+        this.usuarioService = usuarioService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Venta>> listar() {
-        List<Venta> ventas = ventaService.listarVentas();
-        return ResponseEntity.ok(ventas);
+    // Cambiamos esta ruta para que sea la principal y no choque
+    @GetMapping("/gestion")
+    public String listarVentas(Model model) {
+        model.addAttribute("ventas", ventaService.listarVentas());
+        model.addAttribute("clientes", clienteService.listarTodos());
+        model.addAttribute("usuarios", usuarioService.listarUsuarios());
+        return "ventas"; // Esto carga el HTML
     }
 
-    @GetMapping("/{codigoVenta}")
-    public ResponseEntity<Venta> buscarPorCodigo(@PathVariable Long codigoVenta) {
-        return ventaService.buscarPorCodigoVenta(codigoVenta)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Para buscar por ID, le agregamos /buscar/ para que no choque con /gestion
+    @GetMapping("/buscar/{codigoVenta}")
+    @ResponseBody // Para que devuelva JSON si lo necesitas
+    public Venta buscarPorCodigo(@PathVariable Long codigoVenta) {
+        return ventaService.buscarPorCodigoVenta(codigoVenta).orElse(null);
     }
 
-    @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody Venta venta) {
-        try {
-            Venta nuevaVenta = ventaService.guardar(venta);
-            return new ResponseEntity<>(nuevaVenta, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
-
-    @DeleteMapping("/{codigoVenta}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long codigoVenta) {
-        try {
-            if (!ventaService.existePorCodigoVenta(codigoVenta)) {
-                return ResponseEntity.notFound().build();
-            }
-            ventaService.eliminar(codigoVenta);
-            return ResponseEntity.ok().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
-    }
-
-    @PutMapping("/{codigoVenta}")
-    public ResponseEntity<?> actualizar(@PathVariable Long codigoVenta, @RequestBody Venta venta) {
-        try {
-            if (!ventaService.existePorCodigoVenta(codigoVenta)) {
-                return ResponseEntity.notFound().build();
-            }
-            Venta ventaActualizada = ventaService.actualizar(codigoVenta, venta);
-            return ResponseEntity.ok(ventaActualizada);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute Venta venta) {
+        ventaService.guardar(venta);
+        return "redirect:/ventas/gestion";
     }
 }
