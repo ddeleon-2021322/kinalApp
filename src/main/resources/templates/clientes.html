@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Clientes - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Gestión de Clientes</h1>
+        <a th:href="@{/menu}" class="btn-back">Volver al Menú</a>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/clientes/guardar}" method="post" class="glass-form">
+            <input type="text" name="DPICliente" placeholder="DPI (ID)" required>
+            <input type="text" name="nombreCliente" placeholder="Nombres" required>
+            <input type="text" name="apellidoCliente" placeholder="Apellidos" required>
+            <input type="text" name="direccionCliente" placeholder="Dirección" required>
+            <input type="hidden" name="estado" value="1">
+
+            <button type="submit" class="btn-save">Guardar Cliente</button>
+        </form>
+    </section>
+
+    <section class="table-container">
+        <table class="glass-table">
+            <thead>
+            <tr>
+                <th>DPI</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>DIRECCIÓN</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="c : ${clientes}">
+                <td th:text="${c.DPICliente}">12345</td>
+                <td th:text="${c.nombreCliente}">Nombre</td>
+                <td th:text="${c.apellidoCliente}">Apellido</td>
+                <td th:text="${c.direccionCliente}">Dirección</td>
+                <td class="actions-cell">
+                    <a th:href="@{/clientes/editar/{id}(id=${c.DPICliente})}" class="btn-edit">Editar</a>
+                    <a th:href="@{/clientes/eliminar/{id}(id=${c.DPICliente})}"
+                       class="btn-delete"
+                       onclick="return confirm('¿Seguro que quieres eliminar este cliente?')">
+                        Eliminar
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>
