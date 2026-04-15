@@ -1,0 +1,39 @@
+/* --- ESTILO UNIFICADO DE ACCIONES --- */
+
+.actions-cell {
+    text-align: center; /* Centra todo el contenido de la celda */
+    vertical-align: middle;
+    padding: 8px 0 !important;
+    min-width: 100px;
+}
+
+/* Botón Editar (Igual a productos) */
+.btn-edit {
+    background-color: #e9f7ef;
+    color: #28a745;
+    padding: 4px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block; /* Se comporta como cajita */
+    margin-bottom: 4px;    /* Separa del link de abajo */
+}
+
+/* Link Eliminar (Igual a productos) */
+.btn-delete-link {
+    color: #4400ff;         /* El azul que usas en los otros */
+    text-decoration: underline;
+    font-size: 0.85rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;         /* Ocupa todo el ancho disponible */
+    width: 100%;            /* Al ser 100%, el text-align del padre lo centra */
+    margin: 0 auto;
+}
+
+.btn-delete-link:hover {
+    color: #0000aa;
+    text-decoration: none;
+}
