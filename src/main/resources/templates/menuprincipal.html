@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>MenuPrincipal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+<body>
+
+<div class="Menu">
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-user-gear"></i></div>
+        <h3>Clientes</h3>
+        <p>Gestion de clientes</p>
+        <a th:href="@{/clientes}" class="btn-action">Configurar</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <h3>Productos</h3>
+        <p>Gestion de productos</p>
+        <a th:href="@{/productos}" class="btn-action">Ver Stock</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <h3>Venta</h3>
+        <p>Gestion de ventas</p>
+        <a th:href="@{/ventas}" class="btn-action">Reportes</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-circle-info"></i></div>
+        <h3>Detalle Venta</h3>
+        <p>Artículos vendidos</p>
+        <a th:href="@{/detalles}" class="btn-action">Detalles</a>
+    </div>
+
+</div>
+
+</body>
+</html>
