@@ -1,0 +1,107 @@
+/* 1. Fondo con degradado radial suave */
+body {
+    background: radial-gradient(circle, #b5cadd 0%, #8ca6be 100%);
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
+
+/* 2. El contenedor principal (La burbuja azul) */
+.InicioDeSesion {
+    background: linear-gradient(180deg, #5c7895 0%, #4a6177 100%);
+    border-radius: 20px;
+    padding: 35px;
+    width: 380px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.1);
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.EncabezadoIS {
+    color: white;
+    font-size: 24px;
+    margin-bottom: 25px;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* 3. Estilos para los Inputs */
+.form-control-custom {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+}
+
+.form-control-custom::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.form-control-custom:focus {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-color: #ffffff !important;
+    box-shadow: none;
+    color: white;
+}
+
+/* 4. Contenedor de Remember Me */
+.remember-me-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* 5. Estilo del Botón */
+.btn-send {
+    background-color: #ffffff;
+    color: #4a6177;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-send:hover {
+    background-color: #e2e2e2;
+    transform: translateY(-2px);
+}
+
+/* 6. Alerta de Error */
+.alertaCustomizada {
+    color: #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    border: 1px solid #ff6b6b;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
