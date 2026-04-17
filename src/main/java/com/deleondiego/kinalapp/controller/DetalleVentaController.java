@@ -2,70 +2,76 @@ package com.deleondiego.kinalapp.controller;
 
 import com.deleondiego.kinalapp.entity.DetalleVenta;
 import com.deleondiego.kinalapp.service.IDetalleVentaService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.deleondiego.kinalapp.service.IProductoService;
+import com.deleondiego.kinalapp.service.IVentaService;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.math.BigDecimal;
 
-@RestController
+@Controller
 @RequestMapping("/detalles-ventas")
 public class DetalleVentaController {
 
     private final IDetalleVentaService detalleVentaService;
+    private final IVentaService ventaService;
+    private final IProductoService productoService;
 
-    public DetalleVentaController(IDetalleVentaService detalleVentaService) {
+    public DetalleVentaController(IDetalleVentaService detalleVentaService, IVentaService ventaService, IProductoService productoService) {
         this.detalleVentaService = detalleVentaService;
+        this.ventaService = ventaService;
+        this.productoService = productoService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<DetalleVenta>> listar() {
-        List<DetalleVenta> detalles = detalleVentaService.listarDetalles();
-        return ResponseEntity.ok(detalles);
+    // Ruta para el Menú Principal
+    @GetMapping("/menuprincipal")
+    public String mostrarMenu() {
+        return "menuprincipal";
     }
 
-    @GetMapping("/{codigoDetalleVenta}")
-    public ResponseEntity<DetalleVenta> buscarPorCodigo(@PathVariable Long codigoDetalleVenta) {
-        return detalleVentaService.buscarPorCodigoDetalleVenta(codigoDetalleVenta)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    @GetMapping("/gestion")
+    public String listar(Model model) {
+        model.addAttribute("detalles", detalleVentaService.listarDetalles());
+        model.addAttribute("ventas", ventaService.listarVentas());
+        model.addAttribute("productos", productoService.listarProductos());
+        return "detalle-venta";
     }
 
-    @PostMapping
-    public ResponseEntity<?> guardar(@RequestBody DetalleVenta detalleVenta) {
-        try {
-            DetalleVenta nuevoDetalle = detalleVentaService.guardar(detalleVenta);
-            return new ResponseEntity<>(nuevoDetalle, HttpStatus.CREATED);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+    @PostMapping("/guardar")
+    public String guardar(@ModelAttribute DetalleVenta detalleVenta) {
+        if (detalleVenta.getCantidad() != null && detalleVenta.getPrecioUnitario() != null) {
+            BigDecimal cantidad = new BigDecimal(detalleVenta.getCantidad());
+            detalleVenta.setSubtotal(detalleVenta.getPrecioUnitario().multiply(cantidad));
         }
+        detalleVentaService.guardar(detalleVenta);
+        return "redirect:/detalles-ventas/gestion";
     }
 
-    @DeleteMapping("/{codigoDetalleVenta}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long codigoDetalleVenta) {
-        try {
-            if (!detalleVentaService.existePorCodigoDetalleVenta(codigoDetalleVenta)) {
-                return ResponseEntity.notFound().build();
-            }
-            detalleVentaService.eliminar(codigoDetalleVenta);
-            return ResponseEntity.ok().build();
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditar(@PathVariable("id") Long id, Model model) {
+        DetalleVenta detalle = detalleVentaService.buscarPorCodigoDetalleVenta(id).orElse(null);
+        if (detalle == null) return "redirect:/detalles-ventas/gestion";
+
+        model.addAttribute("detalleVenta", detalle);
+        model.addAttribute("ventas", ventaService.listarVentas());
+        model.addAttribute("productos", productoService.listarProductos());
+        return "editar-detalle";
     }
 
-    @PutMapping("/{codigoDetalleVenta}")
-    public ResponseEntity<?> actualizar(@PathVariable Long codigoDetalleVenta, @RequestBody DetalleVenta detalleVenta) {
-        try {
-            if (!detalleVentaService.existePorCodigoDetalleVenta(codigoDetalleVenta)) {
-                return ResponseEntity.notFound().build();
-            }
-            DetalleVenta detalleActualizado = detalleVentaService.actualizar(codigoDetalleVenta, detalleVenta);
-            return ResponseEntity.ok(detalleActualizado);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
+    @PostMapping("/actualizar")
+    public String actualizar(@ModelAttribute("detalleVenta") DetalleVenta detalleVenta) {
+        if (detalleVenta.getCantidad() != null && detalleVenta.getPrecioUnitario() != null) {
+            BigDecimal cantidad = new BigDecimal(detalleVenta.getCantidad());
+            detalleVenta.setSubtotal(detalleVenta.getPrecioUnitario().multiply(cantidad));
         }
+        detalleVentaService.guardar(detalleVenta);
+        return "redirect:/detalles-ventas/gestion";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable("id") Long id) {
+        detalleVentaService.eliminar(id);
+        return "redirect:/detalles-ventas/gestion";
     }
 }
