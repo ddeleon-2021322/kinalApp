@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Detalle - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+</head>
+<body style="background-color: #f4f7f6; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;">
+<div style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px;">
+    <h2 style="margin-top: 0;">Editar Detalle #<span th:text="${detalleVenta.codigoDetalleVenta}"></span></h2>
+
+    <form th:action="@{/detalles-ventas/actualizar}" th:object="${detalleVenta}" method="post">
+        <input type="hidden" th:field="*{codigoDetalleVenta}">
+        <input type="hidden" th:field="*{subtotal}">
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Venta:</label>
+            <select th:field="*{venta.codigoVenta}" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <option th:each="v : ${ventas}" th:value="${v.codigoVenta}" th:text="'Venta #' + ${v.codigoVenta}"></option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Producto:</label>
+            <select th:field="*{producto.codigoProducto}" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd;">
+                <option th:each="p : ${productos}" th:value="${p.codigoProducto}" th:text="${p.nombreProducto}"></option>
+            </select>
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px;">Cantidad:</label>
+            <input type="number" th:field="*{cantidad}" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box;" required>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px;">Precio Unitario:</label>
+            <input type="number" step="0.01" th:field="*{precioUnitario}" style="width: 100%; padding: 8px; border-radius: 5px; border: 1px solid #ddd; box-sizing: border-box;" required>
+        </div>
+
+        <button type="submit" style="width: 100%; padding: 10px; background: #28a745; color: white; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Actualizar Detalle</button>
+        <a th:href="@{/detalles-ventas/gestion}" style="display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; font-size: 0.9em;">Cancelar</a>
+    </form>
+</div>
+</body>
+</html>
