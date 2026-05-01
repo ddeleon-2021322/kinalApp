@@ -1,107 +1,122 @@
-/* 1. Fondo con degradado radial suave */
-body {
-    background: radial-gradient(circle, #b5cadd 0%, #8ca6be 100%);
+body.login-page {
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
     height: 100vh;
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    overflow: hidden;
+    align-items: center;
+    color: #4A4A4A;
 }
 
-/* 2. El contenedor principal (La burbuja azul) */
-.InicioDeSesion {
-    background: linear-gradient(180deg, #5c7895 0%, #4a6177 100%);
-    border-radius: 20px;
-    padding: 35px;
-    width: 380px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+.login-card {
+    background: #ffffff;
+    padding: 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0,05);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
-.EncabezadoIS {
-    color: white;
-    font-size: 24px;
-    margin-bottom: 25px;
-    font-weight: 500;
+.login-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #b8a398;
+}
+
+.login-header h2 span {
+    color: #d4a373;
+    font-weight: 600;
+}
+
+.login-header p {
+    font-size: 0.9rem;
+    color: #8E8E8E;
+    margin-bottom: 2rem;
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 1.2rem;
     text-align: left;
 }
 
-/* 3. Estilos para los Inputs */
-.form-control-custom {
-    background: rgba(255, 255, 255, 0.1) !important;
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
-    color: white !important;
-    border-radius: 8px;
-    padding: 12px;
-    margin-bottom: 15px;
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
 }
 
-.form-control-custom::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.form-control-custom:focus {
-    background: rgba(255, 255, 255, 0.2) !important;
-    border-color: #ffffff !important;
-    box-shadow: none;
-    color: white;
-}
-
-/* 4. Contenedor de Remember Me */
-.remember-me-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: white;
-    font-size: 14px;
-    margin-bottom: 20px;
-}
-
-.custom-checkbox {
-    width: 18px;
-    height: 18px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 10px;
-    font-weight: bold;
-}
-
-/* 5. Estilo del Botón */
-.btn-send {
-    background-color: #ffffff;
-    color: #4a6177;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
+.form-group input {
     width: 100%;
-    cursor: pointer;
+    padding: 0.8rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    background-color: #F9F9F9;
     transition: all 0.3s ease;
 }
 
-.btn-send:hover {
-    background-color: #e2e2e2;
-    transform: translateY(-2px);
+.form-group input:focus {
+    outline: none;
+    border-color: #d4a373;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(212, 163, 115, 0.2);
 }
 
-/* 6. Alerta de Error */
-.alertaCustomizada {
-    color: #ff6b6b;
-    background: rgba(255, 107, 107, 0.1);
-    border: 1px solid #ff6b6b;
+/* Botón */
+.btn-login {
+    width: 100%;
+    padding: 0.9rem;
+    background-color: #d4a373;
+    color: white;
+    border: none;
     border-radius: 8px;
-    padding: 10px;
-    margin-bottom: 20px;
-    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 1rem;
+}
+
+.btn-login:hover {
+    background-color: #bc9266;
+}
+
+.alert-error {
+    background-color: #ffeded;
+    color: #d9534f;
+    padding: 0.7rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0275d8;
+    padding: 0.7rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+
+.form-group p {
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.form-group a {
+    color: #d4a373;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.form-group a:hover {
+    text-decoration: underline;
+}
+
+.login-footer {
+    margin-top: 2rem;
+    font-size: 0.75rem;
+    color: #BDBDBD;
 }
