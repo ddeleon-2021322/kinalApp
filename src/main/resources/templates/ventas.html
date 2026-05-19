@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Ventas - Kinal App</title>
-    <link rel="stylesheet" th:href="@{/css/productos.css}">
+    <link rel="stylesheet" th:href="@{/css/ventas.css}">
 </head>
 <body>
 <div class="container">
@@ -58,13 +58,13 @@
                 <td th:text="${v.usuario?.userName}"></td>
                 <td th:text="'Q' + ${v.total}"></td>
                 <td class="actions-cell">
-                    <a th:href="@{/ventas/editar/{id}(id=${v.codigoVenta})}" class="btn-edit">Editar</a>
 
-                    <a th:href="@{/ventas/eliminar/{id}(id=${v.codigoVenta})}"
-                       class="btn-delete"
-                       onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?')">
-                        Eliminar
-                    </a>
+                    <a th:if="${esAdmin}" th:href="@{/ventas/editar/{id}(id=${v.codigoVenta})}" class="btn-edit">Editar</a>
+
+                    <form th:if="${esAdmin}" th:action="@{/ventas/eliminar/{id}(id=${v.codigoVenta})}" method="get" onsubmit="return confirm('¿Estás seguro de que deseas eliminar esta venta?')" style="display:inline;">
+                        <button type="submit" class="btn-delete-link">Eliminar</button>
+                    </form>
+
                 </td>
             </tr>
             </tbody>

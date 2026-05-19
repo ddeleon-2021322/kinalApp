@@ -10,7 +10,6 @@
 <body>
 
 <div class="Menu">
-
     <div class="MenuSeleccion">
         <div class="icon-circle"><i class="fa-solid fa-user-gear"></i></div>
         <h3>Clientes</h3>
@@ -25,7 +24,7 @@
         <a th:href="@{/productos/gestion}" class="btn-action">Ver Stock</a>
     </div>
 
-    <div class="MenuSeleccion">
+    <div class="MenuSeleccion" th:if="${esAdmin}">
         <div class="icon-circle"><i class="fa-solid fa-users-gear"></i></div>
         <h3>Usuarios</h3>
         <p>Gestión de accesos</p>

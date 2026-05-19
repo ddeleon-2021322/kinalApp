@@ -3,20 +3,25 @@ package com.deleondiego.kinalapp.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "usuarios")
+@Table(name = "usuarios")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "codigo_usuario")
+    @Column(name = "codigo_usuario")
     private Long codigoUsuario;
-    @Column
+
+    @Column(name = "user_name")
     private String userName;
+
     @Column
     private String password;
+
     @Column
     private String email;
+
     @Column
     private String rol;
+
     @Column
     private Long estado;
 

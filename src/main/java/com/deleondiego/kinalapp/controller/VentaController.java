@@ -2,13 +2,14 @@ package com.deleondiego.kinalapp.controller;
 
 import com.deleondiego.kinalapp.entity.Venta;
 import com.deleondiego.kinalapp.service.IVentaService;
-import com.deleondiego.kinalapp.service.IClienteService; // Necesario
-import com.deleondiego.kinalapp.service.IUsuarioService; // Necesario
+import com.deleondiego.kinalapp.service.IClienteService;
+import com.deleondiego.kinalapp.service.IUsuarioService;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@Controller // Asegúrate de que NO diga @RestController
+@Controller
 @RequestMapping("/ventas")
 public class VentaController {
 
@@ -22,18 +23,21 @@ public class VentaController {
         this.usuarioService = usuarioService;
     }
 
-    // Cambiamos esta ruta para que sea la principal y no choque
     @GetMapping("/gestion")
-    public String listarVentas(Model model) {
+    public String listarVentas(Authentication authentication, Model model) {
+        boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        model.addAttribute("esAdmin", esAdmin);
+
         model.addAttribute("ventas", ventaService.listarVentas());
         model.addAttribute("clientes", clienteService.listarTodos());
         model.addAttribute("usuarios", usuarioService.listarUsuarios());
-        return "ventas"; // Esto carga el HTML
+        return "ventas";
     }
 
-    // Para buscar por ID, le agregamos /buscar/ para que no choque con /gestion
     @GetMapping("/buscar/{codigoVenta}")
-    @ResponseBody // Para que devuelva JSON si lo necesitas
+    @ResponseBody
     public Venta buscarPorCodigo(@PathVariable Long codigoVenta) {
         return ventaService.buscarPorCodigoVenta(codigoVenta).orElse(null);
     }

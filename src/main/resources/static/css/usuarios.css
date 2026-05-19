@@ -1,40 +1,148 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Gestión de Usuarios</title>
-    <link rel="stylesheet" th:href="@{/css/usuarios.css}">
-</head>
-<body>
-<h1>Gestión de Usuarios</h1>
-<a th:href="@{/menu}">Volver al Menú</a>
+body {
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: #2c3e50;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    background-attachment: fixed;
+    background-size: cover;
+}
 
-<section>
-    <table border="1">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>USER</th>
-            <th>EMAIL</th>
-            <th>ROL</th>
-            <th>ACCIONES</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="u : ${usuarios}">
-            <td th:text="${u.codigoUsuario}"></td>
-            <td th:text="${u.userName}"></td>
-            <td th:text="${u.email}"></td>
-            <td th:text="${u.rol}"></td>
-            <td>
-                <a th:href="@{/usuarios/editar/{id}(id=${u.codigoUsuario})}">Editar</a>
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+    padding: 35px;
+}
 
-                <a th:href="@{/usuarios/eliminar/{id}(id=${u.codigoUsuario})}"
-                   onclick="return confirm('¿Eliminar usuario?')">Eliminar</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-</section>
-</body>
-</html>
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding-bottom: 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #4a6177;
+}
+
+.btn-back {
+    background: transparent;
+    color: #64748b !important;
+    border: 1px solid #cbd5e1;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+.btn-back:hover {
+    background: #ffffff;
+    color: #4a6177 !important;
+    border-color: #4a6177;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.glass-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.glass-table th {
+    background: #f8fafc;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 18px 20px;
+    border-bottom: 2px solid #edf2f7;
+}
+
+.glass-table td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.95rem;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+.glass-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.glass-table tbody tr:hover {
+    background-color: rgba(74, 97, 119, 0.03);
+}
+
+/* COLUMNA DE ACCIONES CENTRALIZADA */
+.actions-cell {
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px 0 !important;
+    min-width: 110px;
+    display: table-cell !important;
+}
+
+.btn-edit {
+    background-color: #e9f7ef;
+    color: #28a745;
+    padding: 5px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.85rem;
+    display: inline-block;
+    width: 75px;
+    box-sizing: border-box;
+    margin: 0 auto 6px auto;
+    text-align: center;
+}
+
+.btn-edit:hover {
+    background-color: #d4edda;
+}
+
+.btn-delete-link {
+    color: #dc3545;
+    text-decoration: underline;
+    font-size: 0.85rem;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block;
+    width: max-content;
+    margin: 0 auto;
+    padding: 2px 0;
+    transition: color 0.2s;
+}
+
+.btn-delete-link:hover {
+    color: #bd2130;
+    text-decoration: none;
+}

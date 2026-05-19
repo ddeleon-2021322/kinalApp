@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    background-color: #4a6177;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -15,12 +15,12 @@ body {
 }
 
 .MenuSeleccion {
-    background: rgba(255, 255, 255, 0.4);
+    background: white;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     padding: 30px;
     text-align: center;
-    color: #2C3E50;
+    color: #496076;
     transition: 0.3s;
 }
 
@@ -45,26 +45,18 @@ body {
 }
 
 .btn-action {
-    /* Hace que el enlace se comporte como un bloque/botón */
     display: inline-block;
-    background: white;
-    color: #4a6177;
-    /* Quita la raya de subrayado que traen los links por defecto */
+    background: #496076;
+    color: white;
     text-decoration: none;
-    /* Espacio interno: 8px arriba/abajo y 25px a los lados */
     padding: 8px 25px;
-    /* Redondea las esquinas del botón */
     border-radius: 8px;
     font-weight: bold;
-    /* Hace que el botón ocupe todo el ancho de la tarjeta */
     width: 100%;
 }
 
 .MenuSeleccion:hover {
-    /* Eleva la tarjeta 8 píxeles hacia arriba */
     transform: translateY(-8px);
-    /* Aumenta un poquito la opacidad del fondo blanco */
     background: rgba(255, 255, 255, 0.15);
-    /* Pone una sombra negra suave abajo para dar efecto de profundidad */
     box-shadow: 0 15px 30px rgba(0,0,0,0.2);
 }

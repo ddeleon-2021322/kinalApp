@@ -3,6 +3,7 @@ package com.deleondiego.kinalapp.controller;
 import com.deleondiego.kinalapp.entity.Usuario;
 import com.deleondiego.kinalapp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication; // IMPORTANTE: Importar para la seguridad
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,13 +17,19 @@ public class WebController {
     private UsuarioService usuarioService;
 
     @GetMapping("/menu")
-    public String home(Model model){
+    public String home(Authentication authentication, Model model) {
+        boolean esAdmin = authentication != null && authentication.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        model.addAttribute("esAdmin", esAdmin);
+
         model.addAttribute("SuccessMessage", "Conexion Establecida con exito");
-                return "menuPrincipal";
+
+        return "menuPrincipal";
     }
 
     @GetMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
@@ -38,4 +45,3 @@ public class WebController {
         return "redirect:/login?success";
     }
 }
-

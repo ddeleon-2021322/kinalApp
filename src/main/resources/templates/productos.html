@@ -1,45 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"> <head>
   <meta charset="UTF-8">
   <title>Gestión de Productos - Kinal App</title>
   <link rel="stylesheet" th:href="@{/css/productos.css}">
-  <style>
-    /* Ajuste rápido para que el formulario sea una sola línea perfecta */
-    .glass-form {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        padding: 20px;
-    }
-    .glass-form input {
-        margin-bottom: 0 !important; /* Quita el espacio de abajo que traen por defecto */
-        height: 45px;
-        flex: 1;
-    }
-    .btn-save {
-        white-space: nowrap; /* Evita que el texto 'Guardar Producto' se parta en dos */
-        min-width: 160px;
-        height: 45px;
-        padding: 0 20px;
-        cursor: pointer;
-    }
-    /* Alineación de las acciones en la tabla */
-    .actions-cell {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-    }
-    .btn-edit, .btn-delete {
-        text-decoration: none;
-        padding: 5px 12px;
-        border-radius: 4px;
-        font-size: 0.9rem;
-        display: inline-block;
-    }
-  </style>
 </head>
 <body>
 <div class="container">
@@ -77,13 +42,18 @@
         <td th:text="'Q' + ${p.precio}">Q123.01</td>
         <td th:text="${p.stock}">123</td>
         <td class="actions-cell">
-          <a th:href="@{/productos/editar/{id}(id=${p.codigoProducto})}" class="btn-edit">Editar</a>
 
-          <a th:href="@{/productos/eliminar/{id}(id=${p.codigoProducto})}"
+          <a sec:authorize="hasRole('ADMIN')"
+             th:href="@{/productos/editar/{id}(id=${p.codigoProducto})}"
+             class="btn-edit">Editar</a>
+
+          <a sec:authorize="hasRole('ADMIN')"
+             th:href="@{/productos/eliminar/{id}(id=${p.codigoProducto})}"
              class="btn-delete"
              onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
             Eliminar
           </a>
+
         </td>
       </tr>
       </tbody>
