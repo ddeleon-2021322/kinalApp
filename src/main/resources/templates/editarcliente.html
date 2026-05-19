@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Cliente - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/productos.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Editar Cliente</h1>
+        <a th:href="@{/clientes/gestion}" class="btn-back">Cancelar y Volver</a>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/clientes/guardar}" method="post" class="glass-form" style="display: flex; flex-direction: column; gap: 20px;">
+
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label style="font-size: 0.85rem; color: #555; font-weight: 600; display: block; margin-bottom: 5px;">DPI (ID)</label>
+                    <input type="text" name="DPICliente" th:value="${cliente.DPICliente}" readonly
+                           style="background-color: #f0f0f0; cursor: not-allowed; width: 100%;">
+                </div>
+
+                <div style="flex: 2;">
+                    <label style="font-size: 0.85rem; color: #555; font-weight: 600; display: block; margin-bottom: 5px;">Nombres</label>
+                    <input type="text" name="nombreCliente" th:value="${cliente.nombreCliente}" required style="width: 100%;">
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 1;">
+                    <label style="font-size: 0.85rem; color: #555; font-weight: 600; display: block; margin-bottom: 5px;">Apellidos</label>
+                    <input type="text" name="apellidoCliente" th:value="${cliente.apellidoCliente}" required style="width: 100%;">
+                </div>
+
+                <div style="flex: 2;">
+                    <label style="font-size: 0.85rem; color: #555; font-weight: 600; display: block; margin-bottom: 5px;">Dirección Completa</label>
+                    <input type="text" name="direccionCliente" th:value="${cliente.direccionCliente}" required style="width: 100%;">
+                </div>
+            </div>
+
+            <input type="hidden" name="estado" th:value="${cliente.estado}">
+
+            <button type="submit" class="btn-save" style="width: 220px; align-self: flex-end;">Guardar Cambios</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

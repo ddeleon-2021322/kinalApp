@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Productos - Kinal App</title>
+  <link rel="stylesheet" th:href="@{/css/productos.css}">
+  <style>
+    /* Ajuste rápido para que el formulario sea una sola línea perfecta */
+    .glass-form {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        padding: 20px;
+    }
+    .glass-form input {
+        margin-bottom: 0 !important; /* Quita el espacio de abajo que traen por defecto */
+        height: 45px;
+        flex: 1;
+    }
+    .btn-save {
+        white-space: nowrap; /* Evita que el texto 'Guardar Producto' se parta en dos */
+        min-width: 160px;
+        height: 45px;
+        padding: 0 20px;
+        cursor: pointer;
+    }
+    /* Alineación de las acciones en la tabla */
+    .actions-cell {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+    }
+    .btn-edit, .btn-delete {
+        text-decoration: none;
+        padding: 5px 12px;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        display: inline-block;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Gestión de Productos</h1>
+    <a th:href="@{/menu}" class="btn-back">Volver al Menú</a>
+  </header>
+
+  <section class="form-container">
+    <form th:action="@{/productos/guardar}" method="post" class="glass-form">
+      <input type="number" name="codigoProducto" placeholder="Código (ID)" required>
+      <input type="text" name="nombreProducto" placeholder="Nombre del Producto" required style="flex: 2;">
+      <input type="number" step="0.01" name="precio" placeholder="Precio (10.50)" required>
+      <input type="number" name="stock" placeholder="Stock" required>
+
+      <button type="submit" class="btn-save">Guardar Producto</button>
+    </form>
+  </section>
+
+  <section class="table-container">
+    <table class="glass-table">
+      <thead>
+      <tr>
+        <th>CÓDIGO</th>
+        <th>NOMBRE</th>
+        <th>PRECIO</th>
+        <th>STOCK</th>
+        <th>ACCIONES</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="p : ${productos}">
+        <td th:text="${p.codigoProducto}">123</td>
+        <td th:text="${p.nombreProducto}">Azucar</td>
+        <td th:text="'Q' + ${p.precio}">Q123.01</td>
+        <td th:text="${p.stock}">123</td>
+        <td class="actions-cell">
+          <a th:href="@{/productos/editar/{id}(id=${p.codigoProducto})}" class="btn-edit">Editar</a>
+
+          <a th:href="@{/productos/eliminar/{id}(id=${p.codigoProducto})}"
+             class="btn-delete"
+             onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
+            Eliminar
+          </a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </section>
+</div>
+</body>
+</html>

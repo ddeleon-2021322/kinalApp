@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Venta - Kinal App</title>
+    <link rel="stylesheet" th:href="@{/css/ventas.css}">
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="header-content">
+            <h1>Editar Venta #<span th:text="${venta.codigoVenta}"></span></h1>
+            <a th:href="@{/ventas/gestion}" class="btn-back">Cancelar</a>
+        </div>
+    </header>
+
+    <section class="form-container">
+        <form th:action="@{/ventas/actualizar}" th:object="${venta}" method="post" class="glass-form">
+            <input type="hidden" th:field="*{codigoVenta}">
+            <input type="hidden" th:field="*{fechaVenta}">
+            <input type="hidden" th:field="*{estado}">
+
+            <div class="form-group">
+                <label>Cliente:</label>
+                <select th:field="*{cliente}" class="custom-select" required>
+                    <option th:each="c : ${clientes}"
+                            th:value="${c.DPICliente}"
+                            th:text="${c.DPICliente + ' - ' + c.nombreCliente}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vendedor:</label>
+                <select th:field="*{usuario}" class="custom-select" required>
+                    <option th:each="u : ${usuarios}"
+                            th:value="${u.codigoUsuario}"
+                            th:text="${u.codigoUsuario + ' - ' + u.userName}"></option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Total de la Venta (Q):</label>
+                <input type="number" step="0.01" th:field="*{total}" required>
+            </div>
+
+            <button type="submit" class="btn-save">Actualizar Venta</button>
+        </form>
+    </section>
+</div>
+</body>
+</html>

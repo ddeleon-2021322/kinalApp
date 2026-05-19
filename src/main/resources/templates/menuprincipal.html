@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú Principal - Kinal App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" th:href="@{/css/menu.css}">
+</head>
+<body>
+
+<div class="Menu">
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-user-gear"></i></div>
+        <h3>Clientes</h3>
+        <p>Gestión de clientes</p>
+        <a th:href="@{/clientes/gestion}" class="btn-action">Configurar</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-boxes-stacked"></i></div>
+        <h3>Productos</h3>
+        <p>Gestión de productos</p>
+        <a th:href="@{/productos/gestion}" class="btn-action">Ver Stock</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-users-gear"></i></div>
+        <h3>Usuarios</h3>
+        <p>Gestión de accesos</p>
+        <a th:href="@{/usuarios/gestion}" class="btn-action">Usuarios</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+        <h3>Venta</h3>
+        <p>Gestión de ventas</p>
+        <a th:href="@{/ventas/gestion}" class="btn-action">Reportes</a>
+    </div>
+
+    <div class="MenuSeleccion">
+        <div class="icon-circle"><i class="fa-solid fa-circle-info"></i></div>
+        <h3>Detalle Venta</h3>
+        <p>Artículos vendidos</p>
+        <a th:href="@{/detalles/gestion}" class="btn-action">Detalles</a>
+    </div>
+
+</div>
+
+</body>
+</html>
