@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Detalle Venta - Kinal App</title>
+    <title>Gestión Detalle Venta - Kinal App</title>
     <link rel="stylesheet" th:href="@{/css/productos.css}">
 </head>
 <body>
@@ -16,25 +16,30 @@
 
     <section class="form-container">
         <form th:action="@{/detalles-ventas/guardar}" method="post" class="glass-form">
+
             <select name="venta.codigoVenta" class="custom-select" required>
-                <option value="" disabled selected>Venta (ID)</option>
-                <option th:each="v : ${ventas}" th:value="${v.codigoVenta}" th:text="'Venta #' + ${v.codigoVenta}"></option>
+                <option value="" disabled selected>Seleccionar Venta (ID)</option>
+                <option th:each="v : ${ventas}"
+                        th:value="${v.codigoVenta}"
+                        th:text="'Venta #' + ${v.codigoVenta}"></option>
             </select>
 
             <select name="producto.codigoProducto" class="custom-select" required>
-                <option value="" disabled selected>Producto</option>
-                <option th:each="p : ${productos}" th:value="${p.codigoProducto}" th:text="${p.nombreProducto}"></option>
+                <option value="" disabled selected>Seleccionar Producto</option>
+                <option th:each="p : ${productos}"
+                        th:value="${p.codigoProducto}"
+                        th:text="${p.nombreProducto}"></option>
             </select>
 
-            <input type="number" name="cantidad" placeholder="Cantidad" required>
-            <input type="number" step="0.01" name="precioUnitario" placeholder="Precio Q" required>
+            <input type="number" name="cantidad" placeholder="Cantidad" min="1" required>
+            <input type="number" step="0.01" name="precioUnitario" placeholder="Precio Unitario Q" required>
 
             <button type="submit" class="btn-save">Registrar Detalle</button>
         </form>
     </section>
 
-    <section class="table-container" style="width: 100%; overflow-x: auto;">
-        <table class="glass-table" style="width: 100%; min-width: 900px;">
+    <section class="table-container">
+        <table class="glass-table">
             <thead>
             <tr>
                 <th>ID</th>
@@ -43,7 +48,7 @@
                 <th>CANTIDAD</th>
                 <th>PRECIO UNIT.</th>
                 <th>SUBTOTAL</th>
-                <th style="text-align: center;">ACCIONES</th>
+                <th>ACCIONES</th>
             </tr>
             </thead>
             <tbody>
@@ -53,13 +58,17 @@
                 <td th:text="${d.producto?.nombreProducto}"></td>
                 <td th:text="${d.cantidad}"></td>
                 <td th:text="'Q' + ${d.precioUnitario}"></td>
-                <td th:text="'Q' + ${d.subtotal}" style="font-weight: bold;"></td>
-                <td style="text-align: center; vertical-align: middle;">
-                    <a th:href="@{/detalles-ventas/editar/{id}(id=${d.codigoDetalleVenta})}"
-                       style="background-color: #e9f7ef; color: #28a745; padding: 4px 12px; border-radius: 4px; text-decoration: none; font-weight: bold; font-size: 0.75rem; display: inline-block; border: 1px solid #28a745;">Editar</a>
+                <td th:text="'Q' + ${d.subtotal}"></td>
+
+                <td class="actions-cell">
+                    <a th:href="@{/detalles-ventas/editar/{id}(id=${d.codigoDetalleVenta})}" class="btn-edit">
+                        Editar
+                    </a>
+
                     <a th:href="@{/detalles-ventas/eliminar/{id}(id=${d.codigoDetalleVenta})}"
-                       style="color: #4400ff; text-decoration: underline; font-size: 0.75rem; display: block;"
-                       onclick="return confirm('¿Eliminar detalle?')">Eliminar</a>
+                       onclick="return confirm('¿Eliminar detalle?')">
+                        Eliminar
+                    </a>
                 </td>
             </tr>
             </tbody>

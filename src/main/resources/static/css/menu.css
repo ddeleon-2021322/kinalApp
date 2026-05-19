@@ -1,36 +1,26 @@
 body {
-    /* Crea el degradado circular: azul claro en el centro a azul grisáceo afuera */
-    background: radial-gradient(circle, #b5cadd 0%, #8ca6be 100%);
-    /* Hace que el fondo ocupe TODA la altura de la pantalla */
-    min-height: 100vh;
-    /* Quita los espacios blancos que el navegador pone por defecto a las orillas */
-    margin: 0;
-    /* Define la letra para que se vea moderna y limpia */
-    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #4A4A4A;
 }
 
 .Menu {
     display: flex;
-    flex-wrap: wrap; /* Esto hace que si no caben las 4, la última baje */
     justify-content: center;
     gap: 20px;
     padding: 40px;
 }
 
 .MenuSeleccion {
-    /* Define el color de fondo con transparencia (efecto cristal) */
-    background: rgba(255, 255, 255, 0.1);
-    /* Dibuja un borde delgadito casi invisible */
+    background: rgba(255, 255, 255, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    /* Redondea las esquinas de la tarjeta */
     border-radius: 20px;
-    /* Espacio interno para que el texto no pegue a los bordes de la tarjeta */
     padding: 30px;
-    /* Hace que todo el texto e iconos dentro se centren */
     text-align: center;
-    /* Color de letra blanco */
-    color: white;
-    /* Controla la velocidad de la animación cuando pasas el mouse (0.3 segundos) */
+    color: #2C3E50;
     transition: 0.3s;
 }
 

@@ -29,10 +29,10 @@ public class UsuarioController {
         return "redirect:/usuarios/gestion";
     }
 
-    // FUNCIÓN BLOQUEADA: Lanza excepción
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
-        throw new RuntimeException("Función no disponible: La eliminación de registros está restringida.");
+        usuarioService.eliminar(id);
+        return "redirect:/usuarios/gestion";
     }
 
     @GetMapping("/editar/{id}")

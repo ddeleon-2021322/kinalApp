@@ -60,7 +60,11 @@
                 <td class="actions-cell">
                     <a th:href="@{/ventas/editar/{id}(id=${v.codigoVenta})}" class="btn-edit">Editar</a>
 
-                    <a href="#" class="btn-delete-blocked" onclick="alert('No disponible'); return false;">Eliminar</a>
+                    <a th:href="@{/ventas/eliminar/{id}(id=${v.codigoVenta})}"
+                       class="btn-delete"
+                       onclick="return confirm('¿Estás seguro de que deseas eliminar esta venta?')">
+                        Eliminar
+                    </a>
                 </td>
             </tr>
             </tbody>

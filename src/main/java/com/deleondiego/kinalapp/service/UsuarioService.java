@@ -25,8 +25,14 @@ public class UsuarioService implements IUsuarioService{
     }
 
     @Override
-    public Usuario guardar(Usuario usuario){
-        validarUsuario(usuario);
+    public Usuario guardar(Usuario usuario) {
+        usuario.setPassword("{noop}" + usuario.getPassword());
+        if ("admin".equalsIgnoreCase(usuario.getUserName())) {
+            usuario.setRol("ADMIN");
+        } else {
+            usuario.setRol("USER");
+        }
+        usuario.setEstado(1L);
         return usuarioRepository.save(usuario);
     }
 
@@ -54,9 +60,8 @@ public class UsuarioService implements IUsuarioService{
 
     @Override
     public void eliminar(Long codigoUsuario) {
-        //Eliminar un cliente
-        if (!usuarioRepository.existsById(codigoUsuario)){
-            throw new RuntimeException("No se encontro al usuario con ese codigo" + codigoUsuario);
+        if (!usuarioRepository.existsById(codigoUsuario)) {
+            throw new RuntimeException("No se encontró al usuario con ese código: " + codigoUsuario);
         }
         usuarioRepository.deleteById(codigoUsuario);
     }

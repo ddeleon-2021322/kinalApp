@@ -43,4 +43,10 @@ public class VentaController {
         ventaService.guardar(venta);
         return "redirect:/ventas/gestion";
     }
+
+    @GetMapping("/eliminar/{codigoVenta}")
+    public String eliminar(@PathVariable Long codigoVenta) {
+        ventaService.eliminar(codigoVenta);
+        return "redirect:/ventas/gestion";
+    }
 }

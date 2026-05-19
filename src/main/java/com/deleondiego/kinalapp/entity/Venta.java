@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "ventas")
@@ -29,6 +31,7 @@ public class Venta {
 
     @ManyToOne
     @JoinColumn(name = "Usuarios_codigo_usuario")
+    @OnDelete(action = OnDeleteAction.CASCADE)  
     private Usuario usuario;
 
     public Venta() {

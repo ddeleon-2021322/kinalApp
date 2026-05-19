@@ -39,25 +39,22 @@ public class SecurityConfig {
         return http.build();
     }
 
-@Bean
-public UserDetailsService userDetailsService(){
-    UserDetails user = User.builder()
-            .username("user")
-            .password("12345")
-            .roles("USER")
-            .build();
+    @Bean
+    public UserDetailsService userDetailsService(javax.sql.DataSource dataSource) {
+        var manager = new org.springframework.security.provisioning.JdbcUserDetailsManager(dataSource);
+        manager.setUsersByUsernameQuery(
+                "SELECT user_name, password, 1 as enabled FROM usuarios WHERE user_name = ?"
+        );
 
-    UserDetails admin = User.builder()
-            .username("admin")
-            .password("admin")
-            .roles("ADMIN")
-            .build();
+        manager.setAuthoritiesByUsernameQuery(
+                "SELECT user_name, CONCAT('ROLE_', rol) FROM usuarios WHERE user_name = ?"
+        );
 
-    return new InMemoryUserDetailsManager(user, admin);
-}
-@Bean
-public PasswordEncoder passwordEncoder(){
-    return NoOpPasswordEncoder.getInstance();
-}
+        return manager;
+    }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return NoOpPasswordEncoder.getInstance();
+    }
 }
